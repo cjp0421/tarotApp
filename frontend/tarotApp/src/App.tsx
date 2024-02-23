@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [randomCard, setRandomCard] = useState(null);
+
+  useEffect(() => {
+    const fetchRandomCard = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/cards');
+        const cards = response.data;
+
+        const randomIndex = Math.floor(Math.random() * cards.length);
+
+        setRandomCard(cards[randomIndex]);
+      } catch (error) {
+        console.error('Error fetching random card:', error);
+      }
+    };
+
+    fetchRandomCard();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>Hello Tarot!</h1>
+      {randomCard && (
+        <div>
+          <h2>Random Card</h2>
+          <p>ID: {randomCard.id}</p>
+          <p>Name: {randomCard.name}</p>
+          <p>Arcana: {randomCard.arcana}</p>
+          <p>Suit: {randomCard.suit}</p>
+          <p>Rank: {randomCard.rank}</p>
+          <img src={randomCard.image} alt={randomCard.name} />
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
