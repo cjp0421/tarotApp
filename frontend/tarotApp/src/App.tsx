@@ -25,15 +25,30 @@ function App() {
   return (
     <div className="App">
       <h1>Hello Tarot!</h1>
+      <h2>Random Card</h2>
       {randomCard && (
-        <div>
-          <h2>Random Card</h2>
-          <p>ID: {randomCard.id}</p>
-          <p>Name: {randomCard.name}</p>
-          <p>Arcana: {randomCard.arcana}</p>
-          <p>Suit: {randomCard.suit}</p>
-          <p>Rank: {randomCard.rank}</p>
-          <img src={randomCard.image} alt={randomCard.name} />
+        <div style={{
+          display: "flex",
+          alignContent: 'center'
+        }}>
+
+          <div>
+            <img src={randomCard.image} alt={randomCard.name} style={{
+              width: '50%',
+              margin: '0'
+            }} />
+          </div>
+          <div>
+            <p>ID: {randomCard.id}</p>
+            <p>Name: {randomCard.name}</p>
+            <p>Arcana: {randomCard.arcana}</p>
+            <p>Suit: {randomCard.suit}</p>
+            <p>Rank: {randomCard.rank}</p>
+            <p>Key Words: {randomCard.keyWords[0]}, {randomCard.keyWords[1]}</p>
+          </div>
+
+
+
         </div>
       )}
     </div>

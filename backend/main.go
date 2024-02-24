@@ -11,13 +11,13 @@ import (
 
 // Card represents a tarot card
 type Card struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Arcana   string `json:"arcana"`
-	Suit     string `json:"suit"`
-	Rank     string `json:"rank"`
-	KeyWords string `json:"keyWords"`
-	Image    string `json:"image"`
+	ID       string   `json:"id"`
+	Name     string   `json:"name"`
+	Arcana   string   `json:"arcana"`
+	Suit     string   `json:"suit"`
+	Rank     string   `json:"rank"`
+	KeyWords []string `json:"keyWords"`
+	Image    string   `json:"image"`
 }
 
 func getAllCards(w http.ResponseWriter, r *http.Request) {
